@@ -1,7 +1,7 @@
 import axios from "axios";
-import { BASE_URL } from "./utils/constants";
+import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
-import { addConnections } from "./utils/connectionSlice";
+import { addConnections } from "../utils/connectionSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Connections = () => {
@@ -42,7 +42,7 @@ const Connections = () => {
           >
             <div>
               <img
-                className="object-cover rounded-full w-20 h-15"
+                className="object-cover rounded-full w-20 h-20"
                 alt="photo"
                 src={photoUrl}
               />

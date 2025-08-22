@@ -15,7 +15,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => { // Added `e` as a parameter
+    e.preventDefault(); // Prevents page reload
     try {
       const res = await axios.post(
         BASE_URL + "/login",
@@ -34,7 +35,8 @@ const Login = () => {
     }
   };
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e) => { // Added `e` as a parameter
+    e.preventDefault(); // Prevents page reload
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
@@ -58,69 +60,72 @@ const Login = () => {
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-sm">
-        <div className="card-body">
-          <h2 className="card-title justify-center">
-            {isLoginForm ? "Login" : "Sign Up"}
-          </h2>
-          <div>
-            {!isLoginForm && (
-              <>
-                <fieldset className="fieldset my-2">
-                  <legend className="fieldset-legend">First Name</legend>
-                  <input
-                    type="text"
-                    className="input"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </fieldset>
-                <fieldset className="fieldset my-2">
-                  <legend className="fieldset-legend">Last Name</legend>
-                  <input
-                    type="text"
-                    className="input"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </fieldset>
-              </>
-            )}
-            <fieldset className="fieldset my-2">
-              <legend className="fieldset-legend">Email ID</legend>
-              <input
-                type="text"
-                className="input"
-                value={emailId}
-                onChange={(e) => setEmailId(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset my-2">
-              <legend className="fieldset-legend">Password</legend>
-              <input
-                type="text"
-                className="input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </fieldset>
-          </div>
-          <p className="text-red-500">{error}</p>
-          <div className="card-actions justify-center">
-            <button
-              className="btn btn-primary"
-              onClick={isLoginForm ? handleLogin : handleSignUp}
-            >
+        <form onSubmit={isLoginForm ? handleLogin : handleSignUp}> {/* Added <form> tag and `onSubmit` */}
+          <div className="card-body">
+            <h2 className="card-title justify-center">
               {isLoginForm ? "Login" : "Sign Up"}
-            </button>
-          </div>
+            </h2>
+            <div>
+              {!isLoginForm && (
+                <>
+                  <fieldset className="fieldset my-2">
+                    <legend className="fieldset-legend">First Name</legend>
+                    <input
+                      type="text"
+                      className="input"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </fieldset>
+                  <fieldset className="fieldset my-2">
+                    <legend className="fieldset-legend">Last Name</legend>
+                    <input
+                      type="text"
+                      className="input"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </fieldset>
+                </>
+              )}
+              <fieldset className="fieldset my-2">
+                <legend className="fieldset-legend">Email ID</legend>
+                <input
+                  type="text"
+                  className="input"
+                  value={emailId}
+                  onChange={(e) => setEmailId(e.target.value)}
+                />
+              </fieldset>
+              <fieldset className="fieldset my-2">
+                <legend className="fieldset-legend">Password</legend>
+                <input
+                  type="password"
+                  className="input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </fieldset>
+            </div>
+            <p className="text-red-500">{error}</p>
+            <div className="card-actions justify-center">
+              {/* Changed onClick to type="submit" and removed the handler*/}
+              <button
+                type="submit"
+                className="btn btn-primary"
+              >
+                {isLoginForm ? "Login" : "Sign Up"}
+              </button>
+            </div>
 
-          <p
-            onClick={() => setIsLoginForm((value) => !value)}
-            className="cursor-pointer m-auto py-2"
-          >
-            {isLoginForm ? "New User? Signup here" : "Existing User?Login Here"}
-          </p>
-        </div>
+            <p
+              onClick={() => setIsLoginForm((value) => !value)}
+              className="cursor-pointer m-auto py-2"
+            >
+              {isLoginForm ? "New User? Signup here" : "Existing User?Login Here"}
+            </p>
+          </div>
+        </form> {/* Added closing </form> tag */}
       </div>
     </div>
   );

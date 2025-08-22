@@ -33,7 +33,7 @@ const EditProfile = ({ user }) => {
           withCredentials: true,
         }
       );
-      dispatch(addUser(res?.config?.data));
+      dispatch(addUser(res.data));
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);

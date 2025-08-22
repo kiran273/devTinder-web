@@ -5,8 +5,8 @@ import Login from "./components/Login";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Feed from "./components/Feed";
-import Connections from "./Connections";
 import Requests from "./components/Requests";
+import Connections from "./components/Connections";
 
 function App() {
   return (
