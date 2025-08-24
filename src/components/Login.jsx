@@ -15,7 +15,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => { // Added `e` as a parameter
+  const handleLogin = async (e) => {
+    // Added `e` as a parameter
     e.preventDefault(); // Prevents page reload
     try {
       const res = await axios.post(
@@ -35,7 +36,8 @@ const Login = () => {
     }
   };
 
-  const handleSignUp = async (e) => { // Added `e` as a parameter
+  const handleSignUp = async (e) => {
+    // Added `e` as a parameter
     e.preventDefault(); // Prevents page reload
     try {
       const res = await axios.post(
@@ -60,7 +62,9 @@ const Login = () => {
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-sm">
-        <form onSubmit={isLoginForm ? handleLogin : handleSignUp}> {/* Added <form> tag and `onSubmit` */}
+        <form onSubmit={isLoginForm ? handleLogin : handleSignUp}>
+          {" "}
+          {/* Added <form> tag and `onSubmit` */}
           <div className="card-body">
             <h2 className="card-title justify-center">
               {isLoginForm ? "Login" : "Sign Up"}
@@ -110,10 +114,7 @@ const Login = () => {
             <p className="text-red-500">{error}</p>
             <div className="card-actions justify-center">
               {/* Changed onClick to type="submit" and removed the handler*/}
-              <button
-                type="submit"
-                className="btn btn-primary"
-              >
+              <button type="submit" className="btn btn-primary">
                 {isLoginForm ? "Login" : "Sign Up"}
               </button>
             </div>
@@ -122,10 +123,13 @@ const Login = () => {
               onClick={() => setIsLoginForm((value) => !value)}
               className="cursor-pointer m-auto py-2"
             >
-              {isLoginForm ? "New User? Signup here" : "Existing User?Login Here"}
+              {isLoginForm
+                ? "New User? Signup here"
+                : "Existing User?Login Here"}
             </p>
           </div>
-        </form> {/* Added closing </form> tag */}
+        </form>{" "}
+        {/* Added closing </form> tag */}
       </div>
     </div>
   );
